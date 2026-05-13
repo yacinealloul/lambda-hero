@@ -1,0 +1,103 @@
+{
+  "design_system": {
+    "metadata": {
+      "version": "0.1.0",
+      "project_name": "Lambda Hero Section",
+      "source_url": "https://lambda.ai",
+      "section": "Hero"
+    },
+    "profile": {
+      "brand_name": "Lambda",
+      "section_name": "Hero — The Superintelligence Cloud",
+      "primary_purpose": "Full-screen hero with animated background and primary CTAs",
+      "visual_language": {
+        "style": "Dark, monochromatic, brutalist/cyberpunk",
+        "background": "Pure black (#0B0B0B) with animated particle/streak background (Lottie JSON from CDN)",
+        "typography": "Large display heading in Suisse Intl (sans), with specific letters swapping to apkarchivr21 (pixel font) on a timed loop",
+        "cta_style": "Two buttons: primary (off-white bg, black text, RGB chromatic aberration box-shadow) and secondary (purple bg, white text)"
+      }
+    },
+    "fonts": {
+      "sans": "Suisse Intl — loaded from CDN (see @font-face in styles_css.css)",
+      "mono": "Suisse Intl Mono — used for body text and buttons",
+      "pixel": "apkarchivr21 — accent/glitch font used in hero title letter swaps",
+      "note": "Font files are hosted on HubSpot CDN. @font-face declarations are in styles_css.css"
+    },
+    "colors": {
+      "background": "#0B0B0B (--color-terminal)",
+      "text_primary": "#E7E6D9 (--color-shell)",
+      "text_secondary": "#B0AFA6 (--color-neutral-300)",
+      "accent_ultraviolet": "#6236F4 (--color-ultraviolet)",
+      "button_primary_bg": "#E7E6D9",
+      "button_primary_text": "#0B0B0B",
+      "button_secondary_bg": "#6236F4",
+      "button_secondary_text": "#E7E6D9"
+    },
+    "key_css_variables": {
+      "--font-sans": "\"Suisse Intl\", Helvetica, Arial, sans-serif",
+      "--font-mono": "\"Suisse Intl Mono\", \"Courier New\", monospace",
+      "--font-pixel": "\"apkarchivr21\", monospace",
+      "--space-xl": "160px",
+      "--text-7xl": "7.315rem",
+      "--box-shadow-rgb": "0 .99px 0 0 #ff0, .99px 0 0 0 #0ff, 1.98px .99px 0 0 #0f0, 0 -.99px 0 0 #00f, -.99px 0 0 0 #f0f, -1.98px 0 0 0 #f00",
+      "--text-shadow-rgb": "0 .99px 0 #ff0, .99px 0 0 #0ff, 1.98px .99px 0 #0f0, 0 -.99px 0 #00f, -.99px 0 0 #f0f, -1.98px 0 0 #f00"
+    },
+    "section_breakdown": {
+      "layout": "Full-viewport-height flex column, centered content, relative positioning for absolute background",
+      "components": {
+        "background_animation": {
+          "description": "Animated light-streak/particle effect covering the full hero",
+          "original": "Canvas driven by Lottie JSON: https://lambda.ai/hubfs/web-static/motion/superintelligence-II-1.json",
+          "reconstruction_note": "Implement as CSS animation, canvas, or use a video/gif alternative that captures the streaking light effect. The mask fades edges with linear-gradient."
+        },
+        "eyebrow_text": {
+          "text": "Supercomputers for training and inference",
+          "class": "_eyebrow_m4xpb_37",
+          "style": "Suisse Intl semibold, centered, ~1.25rem–1.5rem, color: shell (#E7E6D9), margin-bottom: 20px"
+        },
+        "heading": {
+          "text": "The Superintelligence Cloud",
+          "class": "h1-large",
+          "font_size_breakpoints": {
+            "base": "2.6rem",
+            "480px": "3rem (--text-3xl)",
+            "768px": "4.5rem (--text-5xl)",
+            "1024px": "6rem (--text-6xl)",
+            "1280px": "7.315rem (--text-7xl)"
+          },
+          "line_height": "--leading-none (100%)",
+          "font_weight": "600 (semibold)",
+          "letter_spacing": "--tracking-tighter (-0.02em)",
+          "font_swap_animation": {
+            "description": "Specific letters ('u', 'e', 'o') cycle between Suisse Intl and apkarchivr21 pixel font",
+            "timing": "u: 1000ms delay, e: 4000ms delay, o: 7000ms delay, 11000ms total loop",
+            "pixel_style": "font-family: var(--font-pixel), font-weight: 300, text-shadow: var(--text-shadow-rgb), transform: scale(0.98)",
+            "highlight_style": "When letter is in pixel state: color: #000, mix-blend-mode: screen, background: var(--color-background-light)"
+          }
+        },
+        "cta_buttons": {
+          "layout": "flex row, gap: 18px, justify-content: center, margin-top: 50px",
+          "button_1": {
+            "text": "Launch GPU instance",
+            "style": "Primary — off-white (#E7E6D9) bg, black text, RGB chromatic aberration box-shadow, border-radius: 0, font: Suisse Intl Mono uppercase",
+            "padding": "17px 36px"
+          },
+          "button_2": {
+            "text": "Talk to our team",
+            "style": "Secondary — ultraviolet (#6236F4) bg, white text, no box-shadow",
+            "padding": "17px 36px"
+          }
+        }
+      }
+    },
+    "reconstruction_hints": [
+      "Use source_html.html as the DOM structure reference — preserve class names exactly",
+      "styles_css.css contains all CSS you need — do not invent values, extract them from there",
+      "The hashed class names (_homeHero_m4xpb_1 etc.) can be applied as literal className strings",
+      "For the background animation: Lottie JSON available at https://lambda.ai/hubfs/web-static/motion/superintelligence-II-1.json — or use CSS keyframe animation to approximate the streak effect",
+      "For font-swap: implement a useEffect with setInterval cycling letter font-family between --font-sans and --font-pixel with the specified delays",
+      "Reduced-motion: show only the plain heading without font swap (see _reducedMotionTitle_ class)",
+      "Buttons: border-radius MUST be 0 (overridden with !important in source)"
+    ]
+  }
+}

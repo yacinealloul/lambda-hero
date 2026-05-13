@@ -1,26 +1,299 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   Lambda — @font-face
+   ============================================================ */
+
+@font-face {
+  font-display: swap;
+  font-family: "Suisse Intl Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://21998649.fs1.hubspotusercontent-na1.net/hubfs/21998649/web-static/fonts/SuisseIntlMono-Regular.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Suisse Intl Mono";
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://21998649.fs1.hubspotusercontent-na1.net/hubfs/21998649/web-static/fonts/SuisseIntlMono-Bold.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Suisse Intl";
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://21998649.fs1.hubspotusercontent-na1.net/hubfs/21998649/web-static/fonts/SuisseIntl-Light.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Suisse Intl";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://21998649.fs1.hubspotusercontent-na1.net/hubfs/21998649/web-static/fonts/SuisseIntl-Regular.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Suisse Intl";
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://21998649.fs1.hubspotusercontent-na1.net/hubfs/21998649/web-static/fonts/SuisseIntl-SemiBold.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Suisse Intl";
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://21998649.fs1.hubspotusercontent-na1.net/hubfs/21998649/web-static/fonts/SuisseIntl-Bold.woff2) format("woff2");
+}
+@font-face {
+  ascent-override: 92%;
+  descent-override: 22%;
+  font-display: swap;
+  font-family: apkarchivr21;
+  font-style: normal;
+  font-weight: 400;
+  line-gap-override: 0%;
+  src: url(https://21998649.fs1.hubspotusercontent-na1.net/hubfs/21998649/web-static/fonts/apkarchivr21_regular-webfont.woff) format("woff");
+}
+
+/* ============================================================
+   Lambda — design tokens
+   ============================================================ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-neutral-1000: #000000;
+  --color-neutral-900: #0b0b0b;
+  --color-neutral-800: #262625;
+  --color-neutral-700: #42413e;
+  --color-neutral-600: #5e5d58;
+  --color-neutral-500: #797872;
+  --color-neutral-400: #95948c;
+  --color-neutral-300: #b0afa6;
+  --color-neutral-200: #cccbbf;
+  --color-neutral-100: #e7e6d9;
+  --color-neutral-0: #ffffff;
+  --color-ultraviolet-300: #a186f8;
+  --color-ultraviolet-400: #815ef6;
+  --color-ultraviolet-500: #6236f4;
+
+  --color-shell: var(--color-neutral-100);
+  --color-terminal: var(--color-neutral-900);
+  --color-ultraviolet: var(--color-ultraviolet-500);
+
+  --lambda-bg: var(--color-terminal);
+  --lambda-bg-light: var(--color-shell);
+  --lambda-text-primary: var(--color-shell);
+  --lambda-text-secondary: var(--color-neutral-300);
+
+  --lambda-btn-primary-bg: var(--color-shell);
+  --lambda-btn-primary-text: var(--color-terminal);
+  --lambda-btn-secondary-bg: var(--color-ultraviolet);
+  --lambda-btn-secondary-bg-hover: var(--color-ultraviolet-400);
+  --lambda-btn-secondary-text: var(--color-shell);
+
+  --font-suisse: "Suisse Intl", Helvetica, Arial, sans-serif;
+  --font-suisse-mono: "Suisse Intl Mono", "Courier New", monospace;
+  --font-pixel: "apkarchivr21", monospace;
+
+  --space-xs: 40px;
+  --space-lg: 100px;
+  --space-xl: 160px;
+
+  --easing-snappy: cubic-bezier(.6, 0, .4, 1);
+  --transition-snappy: .1s var(--easing-snappy);
+
+  /* RGB ghost shadow for primary button */
+  --box-shadow-rgb:
+    0 .99px 0 0 #ff0,
+    .99px 0 0 0 #0ff,
+    1.98px .99px 0 0 #0f0,
+    0 -.99px 0 0 #00f,
+    -.99px 0 0 0 #f0f,
+    -1.98px 0 0 0 #f00;
+  --text-shadow-rgb:
+    0 .99px 0 #ff0,
+    .99px 0 0 #0ff,
+    1.98px .99px 0 #0f0,
+    0 -.99px 0 #00f,
+    -.99px 0 0 #f0f,
+    -1.98px 0 0 #f00;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --box-shadow-rgb:
+      0 .5px 0 0 #ff0,
+      .5px 0 0 0 #0ff,
+      1px .5px 0 0 #0f0,
+      0 -.5px 0 0 #00f,
+      -.5px 0 0 0 #f0f,
+      -1px 0 0 0 #f00;
+    --text-shadow-rgb:
+      0 .5px 0 #ff0,
+      .5px 0 0 #0ff,
+      1px .5px 0 #0f0,
+      0 -.5px 0 #00f,
+      -.5px 0 0 #f0f,
+      -1px 0 0 #f00;
   }
 }
 
+/* Expose Lambda tokens to Tailwind utilities */
+@theme inline {
+  --font-suisse: var(--font-suisse);
+  --font-suisse-mono: var(--font-suisse-mono);
+  --font-pixel: var(--font-pixel);
+  --color-shell: var(--color-shell);
+  --color-terminal: var(--color-terminal);
+  --color-ultraviolet: var(--color-ultraviolet);
+  --color-ultraviolet-300: var(--color-ultraviolet-300);
+  --color-ultraviolet-400: var(--color-ultraviolet-400);
+  --color-neutral-300: var(--color-neutral-300);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+html {
+  background-color: var(--lambda-bg);
+  color: var(--lambda-text-secondary);
+  font-family: var(--font-suisse-mono);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--lambda-bg);
+  color: var(--lambda-text-secondary);
+  margin: 0;
+}
+
+/* ============================================================
+   Hero — eyebrow (port of ._eyebrow_m4xpb_37)
+   ============================================================ */
+
+.lambda-eyebrow {
+  font-size: 1rem;
+  max-width: 98%;
+}
+@media (min-width: 768px) {
+  .lambda-eyebrow {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    max-width: 80%;
+  }
+}
+
+/* ============================================================
+   Hero — typography (port of .h1-large)
+   ============================================================ */
+
+.lambda-h1-large {
+  font-family: var(--font-suisse);
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: var(--lambda-text-primary);
+  font-size: 2.6rem;
+}
+@media (min-width: 480px) { .lambda-h1-large { font-size: 3rem; } }
+@media (min-width: 768px) { .lambda-h1-large { font-size: 4.5rem; } }
+@media (min-width: 1024px) { .lambda-h1-large { font-size: 6rem; } }
+@media (min-width: 1280px) { .lambda-h1-large { font-size: 7.315rem; } }
+
+/* Pixel letter swap (e.g. the "e" and "C") */
+.lambda-pixel-swap {
+  font-family: var(--font-pixel);
+  font-weight: 300;
+  display: inline-block;
+  text-shadow: var(--text-shadow-rgb);
+}
+
+/* Highlighted pixel block (white bg + pixel font, mix-blend screen) */
+.lambda-pixel-highlight {
+  font-family: var(--font-pixel);
+  font-weight: 300;
+  display: inline-block;
+  color: #000;
+  background-color: var(--lambda-bg-light);
+  mix-blend-mode: screen;
+  box-shadow: var(--box-shadow-rgb);
+  padding: 0 0.02em;
+}
+
+/* Navbar variant — same Lambda chromatic shadow, sized for a 100px tall header */
+.lambda-btn--nav {
+  padding: 0 28px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+/* ============================================================
+   Hero — buttons (port of .button)
+   ============================================================ */
+
+.lambda-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-suisse-mono);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 17px 36px;
+  gap: 10px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  background: var(--lambda-btn-primary-bg);
+  color: var(--lambda-btn-primary-text);
+  box-shadow: var(--box-shadow-rgb);
+  transition:
+    box-shadow var(--transition-snappy),
+    color var(--transition-snappy),
+    background var(--transition-snappy);
+}
+.lambda-btn:hover {
+  box-shadow: 0 0 0 0 transparent;
+  color: var(--lambda-btn-primary-text);
+}
+
+.lambda-btn--secondary {
+  background: var(--lambda-btn-secondary-bg);
+  color: var(--lambda-btn-secondary-text);
+  box-shadow: none;
+}
+.lambda-btn--secondary:hover {
+  background: var(--lambda-btn-secondary-bg-hover);
+  color: var(--lambda-btn-secondary-text);
+  box-shadow: none;
+}
+
+/* ============================================================
+   Hero — section + spacing utilities
+   ============================================================ */
+
+.lambda-pt-xl { padding-top: clamp(100px, 12vw, 160px); }
+.lambda-pb-xl { padding-bottom: clamp(100px, 12vw, 160px); }
+
+.lambda-container {
+  width: 100%;
+  max-width: 1398px;
+  margin-inline: auto;
+  padding-inline: 15px;
+}
+
+@layer base {
+  html { font-family: var(--font-suisse-mono); }
 }
