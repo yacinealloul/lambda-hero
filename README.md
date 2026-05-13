@@ -8,7 +8,6 @@ Pixel-perfect recreation of the [lambda.ai](https://lambda.ai) hero section, bui
 - **Tailwind CSS v4** with `@theme inline` exposing Lambda's design tokens
 - **Motion** (`motion/react`, formerly Framer Motion) for all animations
 - **shadcn** for primitives + `cn()` utility
-- **Unicorn Studio** (WebGL) for the background — using Lambda's actual scene JSON, not a recreation
 
 ## Project structure
 
